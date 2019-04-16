@@ -263,7 +263,7 @@ func (d *Decoder) origin(v string) (*Origin, error) {
 func (d *Decoder) connection(v string) (*Connection, error) {
 	p, ok := d.fields(v, 3)
 	if !ok {
-		return nil, errFormat
+		return nil, nil
 	}
 	c := new(Connection)
 	c.Network, c.Type, c.Address = p[0], p[1], p[2]

@@ -64,7 +64,7 @@ func (d *Decoder) Decode() (*Session, error) {
 				sess.Media = append(sess.Media, media)
 			}
 		} else if media == nil {
-			err = d.session(sess, f, v)
+			_ = d.session(sess, f, v)
 		} else {
 			err = d.media(media, f, v)
 		}
@@ -82,7 +82,7 @@ func (d *Decoder) session(s *Session, f byte, v string) error {
 		s.Version, err = strconv.Atoi(v)
 	case 'o':
 		if s.Origin != nil {
-			return errUnexpectedField
+			break
 		}
 		s.Origin, err = d.origin(v)
 	case 's':
@@ -97,7 +97,7 @@ func (d *Decoder) session(s *Session, f byte, v string) error {
 		s.Phone = append(s.Phone, v)
 	case 'c':
 		if s.Connection != nil {
-			return errUnexpectedField
+			break
 		}
 		s.Connection, err = d.connection(v)
 	case 'b':
@@ -123,11 +123,11 @@ func (d *Decoder) session(s *Session, f byte, v string) error {
 	case 'r':
 		r, err := d.repeat(v)
 		if err != nil {
-			return err
+			break
 		}
 		s.Repeat = append(s.Repeat, r)
 	default:
-		return errUnexpectedField
+		break
 	}
 	return err
 }

@@ -54,7 +54,8 @@ func (d *Decoder) Decode() (*Session, error) {
 			break
 		}
 		if len(s) < 2 || s[1] != '=' {
-			return nil, &errDecode{errFormat, line, s}
+			//return nil, &errDecode{errFormat, line, s}
+			continue
 		}
 		f, v := s[0], s[2:]
 		if f == 'm' {

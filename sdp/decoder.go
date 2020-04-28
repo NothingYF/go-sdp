@@ -165,7 +165,7 @@ func (d *Decoder) media(m *Media, f byte, v string) error {
 			m.Attributes = append(m.Attributes, a)
 		}
 	default:
-		return errUnexpectedField
+		break
 	}
 	return err
 }

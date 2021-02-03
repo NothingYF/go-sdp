@@ -45,7 +45,8 @@ func (d *Decoder) Decode() (*Session, error) {
 		line++
 		s, err := d.r.ReadLine()
 		if err != nil {
-			if err == io.EOF && sess.Origin != nil {
+			//if err == io.EOF && sess.Origin != nil {
+			if err == io.EOF {
 				break
 			}
 			return nil, err
